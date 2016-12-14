@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9E5D5601E596312558E1FA5 /* Pods_GoodJob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3630DEC4BADD065257580928 /* Pods_GoodJob.framework */; };
+		E7BB3CE11E01440C00DDB559 /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE01E01440C00DDB559 /* Jobs.swift */; };
+		E7BB3CE31E0145C100DDB559 /* JobsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */; };
+		E7BB3CE51E014A5200DDB559 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */; };
 		E7D0B8F21E013EAF00AD6517 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0B8F11E013EAF00AD6517 /* AppDelegate.swift */; };
-		E7D0B8F41E013EAF00AD6517 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0B8F31E013EAF00AD6517 /* ViewController.swift */; };
+		E7D0B8F41E013EAF00AD6517 /* JobsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0B8F31E013EAF00AD6517 /* JobsTableViewController.swift */; };
 		E7D0B8F71E013EAF00AD6517 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D0B8F51E013EAF00AD6517 /* Main.storyboard */; };
 		E7D0B8F91E013EAF00AD6517 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7D0B8F81E013EAF00AD6517 /* Assets.xcassets */; };
 		E7D0B8FC1E013EAF00AD6517 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D0B8FA1E013EAF00AD6517 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3630DEC4BADD065257580928 /* Pods_GoodJob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodJob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1B45D9073B657A638FEB78B /* Pods-GoodJob.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodJob.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodJob/Pods-GoodJob.release.xcconfig"; sourceTree = "<group>"; };
+		E7BB3CE01E01440C00DDB559 /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
+		E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsTableViewCell.swift; sourceTree = "<group>"; };
+		E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		E7D0B8EE1E013EAF00AD6517 /* GoodJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D0B8F11E013EAF00AD6517 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E7D0B8F31E013EAF00AD6517 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E7D0B8F31E013EAF00AD6517 /* JobsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsTableViewController.swift; sourceTree = "<group>"; };
 		E7D0B8F61E013EAF00AD6517 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7D0B8F81E013EAF00AD6517 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7D0B8FB1E013EAF00AD6517 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7D0B8FD1E013EAF00AD6517 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA71FED577C6FEA6EEA25CB1 /* Pods-GoodJob.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodJob.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoodJob/Pods-GoodJob.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9E5D5601E596312558E1FA5 /* Pods_GoodJob.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +51,8 @@
 			children = (
 				E7D0B8F01E013EAF00AD6517 /* GoodJob */,
 				E7D0B8EF1E013EAF00AD6517 /* Products */,
+				F4895A97DF65C69F44475A3F /* Pods */,
+				EF4DF9DD6EA80B681411CFE5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,13 +68,33 @@
 			isa = PBXGroup;
 			children = (
 				E7D0B8F11E013EAF00AD6517 /* AppDelegate.swift */,
-				E7D0B8F31E013EAF00AD6517 /* ViewController.swift */,
+				E7D0B8F31E013EAF00AD6517 /* JobsTableViewController.swift */,
+				E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */,
+				E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */,
 				E7D0B8F51E013EAF00AD6517 /* Main.storyboard */,
+				E7BB3CE01E01440C00DDB559 /* Jobs.swift */,
 				E7D0B8F81E013EAF00AD6517 /* Assets.xcassets */,
 				E7D0B8FA1E013EAF00AD6517 /* LaunchScreen.storyboard */,
 				E7D0B8FD1E013EAF00AD6517 /* Info.plist */,
 			);
 			path = GoodJob;
+			sourceTree = "<group>";
+		};
+		EF4DF9DD6EA80B681411CFE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3630DEC4BADD065257580928 /* Pods_GoodJob.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4895A97DF65C69F44475A3F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EA71FED577C6FEA6EEA25CB1 /* Pods-GoodJob.debug.xcconfig */,
+				B1B45D9073B657A638FEB78B /* Pods-GoodJob.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7D0B9001E013EAF00AD6517 /* Build configuration list for PBXNativeTarget "GoodJob" */;
 			buildPhases = (
+				EE226988B27BF70D85B3FED6 /* [CP] Check Pods Manifest.lock */,
 				E7D0B8EA1E013EAF00AD6517 /* Sources */,
 				E7D0B8EB1E013EAF00AD6517 /* Frameworks */,
 				E7D0B8EC1E013EAF00AD6517 /* Resources */,
+				0D070E6D8A8F95DF1CDEC320 /* [CP] Embed Pods Frameworks */,
+				0DCF9B4C9D8D8A6DF7DC5D7B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,13 +168,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0D070E6D8A8F95DF1CDEC320 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoodJob/Pods-GoodJob-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0DCF9B4C9D8D8A6DF7DC5D7B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoodJob/Pods-GoodJob-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE226988B27BF70D85B3FED6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E7D0B8EA1E013EAF00AD6517 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7D0B8F41E013EAF00AD6517 /* ViewController.swift in Sources */,
+				E7BB3CE11E01440C00DDB559 /* Jobs.swift in Sources */,
+				E7BB3CE51E014A5200DDB559 /* DateExtensions.swift in Sources */,
+				E7D0B8F41E013EAF00AD6517 /* JobsTableViewController.swift in Sources */,
 				E7D0B8F21E013EAF00AD6517 /* AppDelegate.swift in Sources */,
+				E7BB3CE31E0145C100DDB559 /* JobsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,10 +346,12 @@
 		};
 		E7D0B9011E013EAF00AD6517 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA71FED577C6FEA6EEA25CB1 /* Pods-GoodJob.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9E3BES8CW5;
 				INFOPLIST_FILE = GoodJob/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.passionproof.GoodJob;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -272,10 +361,12 @@
 		};
 		E7D0B9021E013EAF00AD6517 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1B45D9073B657A638FEB78B /* Pods-GoodJob.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9E3BES8CW5;
 				INFOPLIST_FILE = GoodJob/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.passionproof.GoodJob;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +393,7 @@
 				E7D0B9021E013EAF00AD6517 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
