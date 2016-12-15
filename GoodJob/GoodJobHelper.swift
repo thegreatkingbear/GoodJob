@@ -33,6 +33,21 @@ class GoodJobHelper {
             print(error.localizedDescription)
             completionHandler(false)
         }
-        
-   }
+    }
+    
+    class func completeAlives(handler:@escaping(Bool) -> Void) -> Void {
+        let realm = try! Realm()
+        do {
+            for alive in alives() {
+                try realm.write {
+                    alive.isArchived = true
+                    print(alive)
+                }
+            }
+            handler(true)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            handler(false)
+        }
+    }
 }

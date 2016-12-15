@@ -12,5 +12,5 @@ import RealmSwift
 class Jobs: Object {
     dynamic var content: String = ""
     dynamic var date = Date()
-    var isArchived = false
+    dynamic var isArchived = false
 }

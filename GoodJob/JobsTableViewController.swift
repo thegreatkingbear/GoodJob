@@ -63,22 +63,20 @@ class JobsTableViewController: UITableViewController {
     
     @IBAction func addGoodJobButtonTapped(_ sender: UIButton) {
         let alert = UIAlertController(title: "잘한일을 적어주세요", message: "", preferredStyle: .alert)
-        
         let saveAction = UIAlertAction(title: "확인", style: .default, handler: { action -> Void in
-            
             let textField = alert.textFields![0] as UITextField
-            
-            print("firstName \(textField.text)")
-            
             let content = textField.text!
-            GoodJobHelper.add(description: content) { _ in
-                self.tableView.reloadData()
+            GoodJobHelper.add(description: content) { result in
+                if result == true {
+                    
+                } else {
+                    
+                }
+                self.updateThisView()
             }
         })
-        
         let cancelAction = UIAlertAction(title: "취소", style: .default, handler: {
             (action : UIAlertAction!) -> Void in
-            
         })
         
         alert.addTextField { (textField : UITextField!) -> Void in
@@ -86,7 +84,27 @@ class JobsTableViewController: UITableViewController {
         }
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
-        
-        self.present(alert, animated: true, completion: nil)    }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func completeGoodJobButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "선물 받을 준비가 되었나요?", message: "정말 축하해요!", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+            GoodJobHelper.completeAlives(handler: { (result) in
+                if result == true {
+                    
+                } else {
+                    
+                }
+                self.updateThisView()
+            })
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { (action) in
+            
+        }
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 

@@ -79,6 +79,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Lkb-Lc-R3J">
+                        <barButtonItem key="leftBarButtonItem" title="완료" id="1eY-XF-qdv">
+                            <connections>
+                                <action selector="completeGoodJobButtonTapped:" destination="rQa-wq-hoJ" id="QNz-LD-7EG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="추가" id="adT-a2-hFk">
                             <connections>
                                 <action selector="addGoodJobButtonTapped:" destination="rQa-wq-hoJ" id="Ji3-yX-ME8"/>
