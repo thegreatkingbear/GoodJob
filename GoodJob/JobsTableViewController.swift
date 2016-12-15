@@ -11,9 +11,22 @@ import RealmSwift
 
 class JobsTableViewController: UITableViewController {
     
+    var notificationToken: NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let realm = try! Realm()
+        notificationToken = realm.addNotificationBlock({ (notification, realm) in
+            self.updateThisView()
+        })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateThisView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +35,15 @@ class JobsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return liveGoodJobs().count
+        return GoodJobHelper.numberOfAlives()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Jobs", for: indexPath) as! JobsTableViewCell
-        let job = liveGoodJobs()[indexPath.row]
+        let job = GoodJobHelper.alives()[indexPath.row]
         cell.contents?.text = job.content
-        cell.number?.text = "\(indexPath.row)"
+        let orderedNumber = indexPath.row + 1
+        cell.number?.text = "\(orderedNumber)"
         cell.date?.text = job.date.toFriendlyDateTimeString(false)
         return cell
     }
@@ -38,10 +52,13 @@ class JobsTableViewController: UITableViewController {
         return 1
     }
     
-    func liveGoodJobs() -> [Jobs] {
-        let realm = try! Realm()
-        let jobs = realm.objects(Jobs.self).filter("isArchived == false").sorted(byProperty: "date", ascending: false)
-        return Array(jobs)
+    func updateViewTitle(number: Int) -> Void {
+        title = "참 잘했어요 \(number)개"
+    }
+    
+    func updateThisView() -> Void {
+        updateViewTitle(number: GoodJobHelper.numberOfAlives())
+        tableView.reloadData()
     }
     
     @IBAction func addGoodJobButtonTapped(_ sender: UIButton) {
@@ -53,14 +70,10 @@ class JobsTableViewController: UITableViewController {
             
             print("firstName \(textField.text)")
             
-            let goodJob = Jobs()
-            goodJob.content = textField.text!
-            let realm = try! Realm()
-            try! realm.write {
-                realm.add(goodJob)
+            let content = textField.text!
+            GoodJobHelper.add(description: content) { _ in
+                self.tableView.reloadData()
             }
-            
-            self.tableView.reloadData()
         })
         
         let cancelAction = UIAlertAction(title: "취소", style: .default, handler: {
