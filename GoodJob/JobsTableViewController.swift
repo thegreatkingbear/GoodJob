@@ -12,6 +12,7 @@ import RealmSwift
 class JobsTableViewController: UITableViewController {
     
     var notificationToken: NotificationToken?
+    var stampImageView: UIImageView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,15 @@ class JobsTableViewController: UITableViewController {
             let content = textField.text!
             GoodJobHelper.add(description: content) { result in
                 if result == true {
-                    
+                    self.stampImageView = UIImageView(image: (UIImage(named: "stamp")))
+                    self.stampImageView?.frame = CGRect(x: self.view.frame.width/2.0, y: self.view.frame.height/2.0, width: 200, height: 200)
+                    self.stampImageView?.center = self.view.center
+                    self.view.addSubview(self.stampImageView!)
+                    UIView.animate(withDuration: 3.0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                        self.stampImageView?.alpha = 0
+                    }, completion: { (isCompleted) in
+                        self.stampImageView?.removeFromSuperview()
+                    })
                 } else {
                     
                 }
