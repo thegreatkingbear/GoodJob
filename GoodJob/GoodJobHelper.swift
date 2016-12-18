@@ -35,6 +35,19 @@ class GoodJobHelper {
         }
     }
     
+    class func delete(job: Jobs, completionHandler:@escaping(Bool) -> Void) -> Void {
+        let realm = try! Realm()
+        do {
+            try realm.write {
+                realm.delete(job)
+            }
+            completionHandler(true)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            completionHandler(false)
+        }
+    }
+    
     class func completeAlives(handler:@escaping(Bool) -> Void) -> Void {
         let realm = try! Realm()
         do {

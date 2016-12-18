@@ -53,6 +53,19 @@ class JobsTableViewController: UITableViewController {
         return 1
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let job = GoodJobHelper.alives()[indexPath.row]
+            GoodJobHelper.delete(job: job) { result in
+                if result == true {
+                    self.updateThisView()
+                } else {
+                    
+                }
+            }
+        }
+    }
+    
     func updateViewTitle(number: Int) -> Void {
         title = "참 잘했어요 \(number)개"
     }
