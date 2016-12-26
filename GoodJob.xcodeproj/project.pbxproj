@@ -9,9 +9,13 @@
 /* Begin PBXBuildFile section */
 		C9E5D5601E596312558E1FA5 /* Pods_GoodJob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3630DEC4BADD065257580928 /* Pods_GoodJob.framework */; };
 		E7118D3B1E0211DE00DCADBC /* GoodJobHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7118D3A1E0211DE00DCADBC /* GoodJobHelper.swift */; };
+		E72723661E0FC05800E2B518 /* GoalsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72723651E0FC05800E2B518 /* GoalsTableViewController.swift */; };
+		E72723681E0FC11B00E2B518 /* GoalsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72723671E0FC11B00E2B518 /* GoalsHelper.swift */; };
 		E7BB3CE11E01440C00DDB559 /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE01E01440C00DDB559 /* Jobs.swift */; };
 		E7BB3CE31E0145C100DDB559 /* JobsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */; };
 		E7BB3CE51E014A5200DDB559 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */; };
+		E7C508BB1E0FBA08006B9612 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C508BA1E0FBA08006B9612 /* Goals.swift */; };
+		E7C508BD1E0FBA88006B9612 /* Child.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C508BC1E0FBA88006B9612 /* Child.swift */; };
 		E7D0B8F21E013EAF00AD6517 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0B8F11E013EAF00AD6517 /* AppDelegate.swift */; };
 		E7D0B8F41E013EAF00AD6517 /* JobsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D0B8F31E013EAF00AD6517 /* JobsTableViewController.swift */; };
 		E7D0B8F71E013EAF00AD6517 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D0B8F51E013EAF00AD6517 /* Main.storyboard */; };
@@ -23,9 +27,13 @@
 		3630DEC4BADD065257580928 /* Pods_GoodJob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodJob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1B45D9073B657A638FEB78B /* Pods-GoodJob.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodJob.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoodJob/Pods-GoodJob.release.xcconfig"; sourceTree = "<group>"; };
 		E7118D3A1E0211DE00DCADBC /* GoodJobHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodJobHelper.swift; sourceTree = "<group>"; };
+		E72723651E0FC05800E2B518 /* GoalsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsTableViewController.swift; sourceTree = "<group>"; };
+		E72723671E0FC11B00E2B518 /* GoalsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsHelper.swift; sourceTree = "<group>"; };
 		E7BB3CE01E01440C00DDB559 /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
 		E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsTableViewCell.swift; sourceTree = "<group>"; };
 		E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		E7C508BA1E0FBA08006B9612 /* Goals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
+		E7C508BC1E0FBA88006B9612 /* Child.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Child.swift; sourceTree = "<group>"; };
 		E7D0B8EE1E013EAF00AD6517 /* GoodJob.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodJob.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D0B8F11E013EAF00AD6517 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7D0B8F31E013EAF00AD6517 /* JobsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsTableViewController.swift; sourceTree = "<group>"; };
@@ -70,12 +78,16 @@
 			isa = PBXGroup;
 			children = (
 				E7D0B8F11E013EAF00AD6517 /* AppDelegate.swift */,
+				E72723651E0FC05800E2B518 /* GoalsTableViewController.swift */,
 				E7D0B8F31E013EAF00AD6517 /* JobsTableViewController.swift */,
 				E7118D3A1E0211DE00DCADBC /* GoodJobHelper.swift */,
+				E72723671E0FC11B00E2B518 /* GoalsHelper.swift */,
 				E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */,
 				E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */,
 				E7D0B8F51E013EAF00AD6517 /* Main.storyboard */,
 				E7BB3CE01E01440C00DDB559 /* Jobs.swift */,
+				E7C508BA1E0FBA08006B9612 /* Goals.swift */,
+				E7C508BC1E0FBA88006B9612 /* Child.swift */,
 				E7D0B8F81E013EAF00AD6517 /* Assets.xcassets */,
 				E7D0B8FA1E013EAF00AD6517 /* LaunchScreen.storyboard */,
 				E7D0B8FD1E013EAF00AD6517 /* Info.plist */,
@@ -224,7 +236,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E72723681E0FC11B00E2B518 /* GoalsHelper.swift in Sources */,
+				E7C508BB1E0FBA08006B9612 /* Goals.swift in Sources */,
+				E72723661E0FC05800E2B518 /* GoalsTableViewController.swift in Sources */,
 				E7BB3CE11E01440C00DDB559 /* Jobs.swift in Sources */,
+				E7C508BD1E0FBA88006B9612 /* Child.swift in Sources */,
 				E7BB3CE51E014A5200DDB559 /* DateExtensions.swift in Sources */,
 				E7118D3B1E0211DE00DCADBC /* GoodJobHelper.swift in Sources */,
 				E7D0B8F41E013EAF00AD6517 /* JobsTableViewController.swift in Sources */,

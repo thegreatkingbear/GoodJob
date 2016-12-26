@@ -18,9 +18,25 @@ class JobsTableViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let realm = try! Realm()
-        notificationToken = realm.addNotificationBlock({ (notification, realm) in
-            self.updateThisView()
+        notificationToken = GoodJobHelper.alives().addNotificationBlock({ (changes) in
+            print(changes)
+            switch changes {
+            case .initial: self.tableView.reloadData()
+            case .update(_, let deletions, let insertions, let updates):
+                let fromRow = {(row: Int) in
+                    return IndexPath(row: row, section: 0)}
+                
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: deletions.map(fromRow), with: .left)
+                self.tableView.insertRows(at: insertions.map(fromRow), with: .right)
+                if insertions.count > 0 {
+                    self.showStampImage()
+                }
+                self.tableView.reloadRows(at: updates.map(fromRow), with: .none)
+                self.tableView.endUpdates()
+                self.updateViewTitle(number: GoodJobHelper.numberOfAlives())
+            default: break
+            }
         })
     }
     
@@ -43,8 +59,6 @@ class JobsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Jobs", for: indexPath) as! JobsTableViewCell
         let job = GoodJobHelper.alives()[indexPath.row]
         cell.contents?.text = job.content
-        let orderedNumber = indexPath.row + 1
-        cell.number?.text = "\(orderedNumber)"
         cell.date?.text = job.date.toFriendlyDateTimeString(false)
         return cell
     }
@@ -56,13 +70,7 @@ class JobsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let job = GoodJobHelper.alives()[indexPath.row]
-            GoodJobHelper.delete(job: job) { result in
-                if result == true {
-                    self.updateThisView()
-                } else {
-                    
-                }
-            }
+            GoodJobHelper.delete(job: job)
         }
     }
     
@@ -75,27 +83,27 @@ class JobsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    func showStampImage() {
+        // 스탬프 이미지를 화면에 띄워줌
+        self.stampImageView = UIImageView(image: (UIImage(named: "stamp")))
+        self.stampImageView?.frame = CGRect(x: self.view.frame.width/2.0, y: self.view.frame.height/2.0, width: 200, height: 200)
+        self.stampImageView?.center = self.view.center
+        self.view.addSubview(self.stampImageView!)
+        
+        // 스탬프가 서서히 보이는 애니메이션 추가
+        UIView.animate(withDuration: 3.0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            self.stampImageView?.alpha = 0
+        }, completion: { (isCompleted) in
+            self.stampImageView?.removeFromSuperview()
+        })
+    }
+    
     @IBAction func addGoodJobButtonTapped(_ sender: UIButton) {
         let alert = UIAlertController(title: "잘한일을 적어주세요", message: "", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "확인", style: .default, handler: { action -> Void in
             let textField = alert.textFields![0] as UITextField
             let content = textField.text!
-            GoodJobHelper.add(description: content) { result in
-                if result == true {
-                    self.stampImageView = UIImageView(image: (UIImage(named: "stamp")))
-                    self.stampImageView?.frame = CGRect(x: self.view.frame.width/2.0, y: self.view.frame.height/2.0, width: 200, height: 200)
-                    self.stampImageView?.center = self.view.center
-                    self.view.addSubview(self.stampImageView!)
-                    UIView.animate(withDuration: 3.0, delay: 0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
-                        self.stampImageView?.alpha = 0
-                    }, completion: { (isCompleted) in
-                        self.stampImageView?.removeFromSuperview()
-                    })
-                } else {
-                    
-                }
-                self.updateThisView()
-            }
+            GoodJobHelper.add(description: content)
         })
         let cancelAction = UIAlertAction(title: "취소", style: .default, handler: {
             (action : UIAlertAction!) -> Void in
@@ -112,14 +120,7 @@ class JobsTableViewController: UITableViewController {
     @IBAction func completeGoodJobButtonTapped(_ sender: UIButton) {
         let alert = UIAlertController(title: "선물 받을 준비가 되었나요?", message: "정말 축하해요!", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
-            GoodJobHelper.completeAlives(handler: { (result) in
-                if result == true {
-                    
-                } else {
-                    
-                }
-                self.updateThisView()
-            })
+            GoodJobHelper.completeAlives()
         }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel) { (action) in
             

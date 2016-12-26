@@ -1,19 +1,19 @@
 //
-//  GoodJobHelper.swift
+//  GoalsHelper.swift
 //  GoodJob
 //
-//  Created by Mookyung Kwak on 2016-12-14.
+//  Created by Mookyung Kwak on 2016-12-25.
 //  Copyright © 2016 Mookyung Kwak. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
 
-class GoodJobHelper {
-    class func alives() -> Results<Jobs> {
+class GoalsHelper {
+    class func alives() -> [Goals] {
         let realm = try! Realm()
-        return realm.objects(Jobs.self).filter("isArchived == false").sorted(byProperty: "date", ascending: false)
-        //return Array(jobs)
+        let goals = realm.objects(Goals.self).filter("isAchieved == false").sorted(byProperty: "startDate", ascending: false)
+        return Array(goals)
     }
     
     class func numberOfAlives() -> Int {
@@ -22,22 +22,22 @@ class GoodJobHelper {
     
     class func add(description: String) -> Void {
         let realm = try! Realm()
-        let goodJob = Jobs()
-        goodJob.content = description
+        let goal = Goals()
+        goal.content = description
         do {
             try realm.write {
-                realm.add(goodJob)
+                realm.add(goal)
             }
         } catch let error as NSError {
             print(error.localizedDescription)
         }
     }
     
-    class func delete(job: Jobs) -> Void {
+    class func delete(goal: Goals) -> Void {
         let realm = try! Realm()
         do {
             try realm.write {
-                realm.delete(job)
+                realm.delete(goal)
             }
         } catch let error as NSError {
             print(error.localizedDescription)
@@ -49,7 +49,7 @@ class GoodJobHelper {
         do {
             for alive in alives() {
                 try realm.write {
-                    alive.isArchived = true
+                    alive.isAchieved = true
                     print(alive)
                 }
             }

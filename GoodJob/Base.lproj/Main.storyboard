@@ -26,31 +26,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLO-WR-sQd">
-                                            <rect key="frame" x="8" y="11" width="40" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어제" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxn-EN-VDI">
+                                            <rect key="frame" x="317" y="11" width="50" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="3Cn-8U-1TF"/>
-                                                <constraint firstAttribute="height" constant="21" id="hHC-A4-IWq"/>
+                                                <constraint firstAttribute="width" constant="50" id="RmI-AD-djV"/>
+                                                <constraint firstAttribute="height" constant="21" id="Rpz-sZ-sjz"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="착한일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLP-0j-J9j">
-                                            <rect key="frame" x="50" y="11" width="220" height="21"/>
+                                            <rect key="frame" x="8" y="11.5" width="299" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="220" id="LeJ-r5-Hh2"/>
                                                 <constraint firstAttribute="height" constant="21" id="PC3-u2-rfD"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어제" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bxn-EN-VDI">
-                                            <rect key="frame" x="287" y="11" width="80" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="RmI-AD-djV"/>
-                                                <constraint firstAttribute="height" constant="21" id="Rpz-sZ-sjz"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -58,18 +47,16 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="leadingMargin" secondItem="uLO-WR-sQd" secondAttribute="leading" id="6Vl-wN-J3w"/>
                                         <constraint firstItem="Bxn-EN-VDI" firstAttribute="centerY" secondItem="eYK-B4-Owp" secondAttribute="centerY" id="GSp-wV-oG8"/>
+                                        <constraint firstItem="Bxn-EN-VDI" firstAttribute="leading" secondItem="mLP-0j-J9j" secondAttribute="trailing" constant="10" id="Jl3-rz-2BG"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Bxn-EN-VDI" secondAttribute="trailing" id="JqD-jE-PYT"/>
                                         <constraint firstItem="mLP-0j-J9j" firstAttribute="centerY" secondItem="eYK-B4-Owp" secondAttribute="centerY" id="KmG-bB-bAp"/>
-                                        <constraint firstItem="uLO-WR-sQd" firstAttribute="centerY" secondItem="eYK-B4-Owp" secondAttribute="centerY" id="XVT-A6-Adq"/>
-                                        <constraint firstItem="mLP-0j-J9j" firstAttribute="leading" secondItem="uLO-WR-sQd" secondAttribute="trailing" constant="2" id="kUz-CR-pJh"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="mLP-0j-J9j" secondAttribute="leading" id="Vkf-cg-nqe"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contents" destination="mLP-0j-J9j" id="rB7-xy-qyn"/>
                                     <outlet property="date" destination="Bxn-EN-VDI" id="LS0-a6-a9R"/>
-                                    <outlet property="number" destination="uLO-WR-sQd" id="uRb-jb-hgu"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -79,9 +66,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Lkb-Lc-R3J">
-                        <barButtonItem key="leftBarButtonItem" title="완료" id="1eY-XF-qdv">
+                        <barButtonItem key="leftBarButtonItem" title="목표" id="1eY-XF-qdv">
                             <connections>
                                 <action selector="completeGoodJobButtonTapped:" destination="rQa-wq-hoJ" id="QNz-LD-7EG"/>
+                                <segue destination="gzv-fK-ubQ" kind="show" id="5jf-N9-O6I"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="추가" id="adT-a2-hFk">
@@ -93,7 +81,35 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yb9-vp-Lx9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="136"/>
+            <point key="canvasLocation" x="1677.5999999999999" y="135.38230884557723"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="PrB-Di-DCd">
+            <objects>
+                <tableViewController id="gzv-fK-ubQ" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XfH-rd-Vba">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wsM-yy-8en">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wsM-yy-8en" id="mdM-H7-PiR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gzv-fK-ubQ" id="37A-oz-Y8a"/>
+                            <outlet property="delegate" destination="gzv-fK-ubQ" id="Pfx-gR-p38"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eph-SZ-98e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2401" y="135"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gFb-pV-XsH">

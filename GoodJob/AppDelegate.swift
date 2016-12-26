@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Realm Objects Migrations
+        let config = Realm.Configuration(
+            schemaVersion: 3,
+            migrationBlock: {
+                migration, oldSchemaVersion in
+                // 버전 2로 올라오면서 Goals, Child 추가
+                // 버전 3에서 Jobs에 Goal 추가
+        })
+        Realm.Configuration.defaultConfiguration = config
+        let _ = try! Realm() // 스키마 바뀐걸 알려주려면 렘을 열어야 함
+
         return true
     }
 

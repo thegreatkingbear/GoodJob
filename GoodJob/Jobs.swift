@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 class Jobs: Object {
+    dynamic var goal: Goals?
     dynamic var content: String = ""
     dynamic var date = Date()
     dynamic var isArchived = false
