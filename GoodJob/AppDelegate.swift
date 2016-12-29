@@ -19,11 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Realm Objects Migrations
         let config = Realm.Configuration(
-            schemaVersion: 3,
+            schemaVersion: 4,
             migrationBlock: {
                 migration, oldSchemaVersion in
                 // 버전 2로 올라오면서 Goals, Child 추가
                 // 버전 3에서 Jobs에 Goal 추가
+                // 버전 4에서 Goals에 desiredAchievement 추가
         })
         Realm.Configuration.defaultConfiguration = config
         let _ = try! Realm() // 스키마 바뀐걸 알려주려면 렘을 열어야 함

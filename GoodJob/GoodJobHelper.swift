@@ -10,20 +10,23 @@ import Foundation
 import RealmSwift
 
 class GoodJobHelper {
-    class func alives() -> Results<Jobs> {
+    class func current(goal: Goals?) -> Results<Jobs>? {
         let realm = try! Realm()
-        return realm.objects(Jobs.self).filter("isArchived == false").sorted(byProperty: "date", ascending: false)
-        //return Array(jobs)
+        return realm.objects(Jobs.self).filter("goal == %@ AND isArchived == false", goal as Any).sorted(byProperty: "date", ascending: false)
     }
     
-    class func numberOfAlives() -> Int {
-        return alives().count
+    class func currentCount(goal: Goals?) -> Int {
+        if let current = current(goal: goal) {
+            return current.count
+        }
+        return 0
     }
     
     class func add(description: String) -> Void {
         let realm = try! Realm()
         let goodJob = Jobs()
         goodJob.content = description
+        goodJob.goal = GoalsHelper.current()
         do {
             try realm.write {
                 realm.add(goodJob)
@@ -44,17 +47,29 @@ class GoodJobHelper {
         }
     }
     
-    class func completeAlives() -> Void {
+    class func complete(job: Jobs) -> Void {
         let realm = try! Realm()
         do {
-            for alive in alives() {
-                try realm.write {
-                    alive.isArchived = true
-                    print(alive)
-                }
+            try realm.write {
+                job.isArchived = true
             }
         } catch let error as NSError {
             print(error.localizedDescription)
+        }
+    }
+    
+    class func updateGoal(fromGoal: Goals?, toGoal: Goals) -> Void {
+        let realm = try! Realm()
+        if let unassigned = current(goal: fromGoal) {
+            for one in unassigned {
+                do {
+                    try realm.write {
+                        one.goal = toGoal
+                    }
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }

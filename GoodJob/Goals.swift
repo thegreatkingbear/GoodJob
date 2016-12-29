@@ -14,4 +14,5 @@ class Goals: Object {
     dynamic var startDate = Date()
     dynamic var endDate = Date()
     dynamic var isAchieved = false
+    var desiredAchievement = 0
 }

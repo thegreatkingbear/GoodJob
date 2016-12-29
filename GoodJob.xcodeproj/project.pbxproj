@@ -11,6 +11,7 @@
 		E7118D3B1E0211DE00DCADBC /* GoodJobHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7118D3A1E0211DE00DCADBC /* GoodJobHelper.swift */; };
 		E72723661E0FC05800E2B518 /* GoalsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72723651E0FC05800E2B518 /* GoalsTableViewController.swift */; };
 		E72723681E0FC11B00E2B518 /* GoalsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72723671E0FC11B00E2B518 /* GoalsHelper.swift */; };
+		E727236C1E13F8F600E2B518 /* GoalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727236B1E13F8F600E2B518 /* GoalsTableViewCell.swift */; };
 		E7BB3CE11E01440C00DDB559 /* Jobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE01E01440C00DDB559 /* Jobs.swift */; };
 		E7BB3CE31E0145C100DDB559 /* JobsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */; };
 		E7BB3CE51E014A5200DDB559 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */; };
@@ -29,6 +30,7 @@
 		E7118D3A1E0211DE00DCADBC /* GoodJobHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodJobHelper.swift; sourceTree = "<group>"; };
 		E72723651E0FC05800E2B518 /* GoalsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsTableViewController.swift; sourceTree = "<group>"; };
 		E72723671E0FC11B00E2B518 /* GoalsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsHelper.swift; sourceTree = "<group>"; };
+		E727236B1E13F8F600E2B518 /* GoalsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsTableViewCell.swift; sourceTree = "<group>"; };
 		E7BB3CE01E01440C00DDB559 /* Jobs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Jobs.swift; sourceTree = "<group>"; };
 		E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsTableViewCell.swift; sourceTree = "<group>"; };
 		E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				E72723671E0FC11B00E2B518 /* GoalsHelper.swift */,
 				E7BB3CE41E014A5200DDB559 /* DateExtensions.swift */,
 				E7BB3CE21E0145C100DDB559 /* JobsTableViewCell.swift */,
+				E727236B1E13F8F600E2B518 /* GoalsTableViewCell.swift */,
 				E7D0B8F51E013EAF00AD6517 /* Main.storyboard */,
 				E7BB3CE01E01440C00DDB559 /* Jobs.swift */,
 				E7C508BA1E0FBA08006B9612 /* Goals.swift */,
@@ -240,6 +243,7 @@
 				E7C508BB1E0FBA08006B9612 /* Goals.swift in Sources */,
 				E72723661E0FC05800E2B518 /* GoalsTableViewController.swift in Sources */,
 				E7BB3CE11E01440C00DDB559 /* Jobs.swift in Sources */,
+				E727236C1E13F8F600E2B518 /* GoalsTableViewCell.swift in Sources */,
 				E7C508BD1E0FBA88006B9612 /* Child.swift in Sources */,
 				E7BB3CE51E014A5200DDB559 /* DateExtensions.swift in Sources */,
 				E7118D3B1E0211DE00DCADBC /* GoodJobHelper.swift in Sources */,
