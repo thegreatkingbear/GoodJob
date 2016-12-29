@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import SDCAlertView
 
 class GoalsHelper {
     class func current() -> Goals? {
@@ -31,7 +32,7 @@ class GoalsHelper {
         return 0
     }
     
-    class func add(description: String, desired: Int) -> Void {
+    class func add(description: String, desired: Int, completion:@escaping(Bool) -> Void) -> Void {
         let realm = try! Realm()
         let goal = Goals()
         goal.content = description
@@ -40,9 +41,16 @@ class GoalsHelper {
             try realm.write {
                 realm.add(goal)
             }
-            GoodJobHelper.updateGoal(fromGoal: nil, toGoal: goal)
+            GoodJobHelper.updateGoal(fromGoal: nil, toGoal: goal) { (isSuccess) in
+                if isSuccess {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
         } catch let error as NSError {
             print(error.localizedDescription)
+            completion(false)
         }
     }
     
@@ -59,10 +67,35 @@ class GoalsHelper {
     
     class func completeCurrent() -> Void {
         if let currentGoal = current() {
-            if let currentJobs = GoodJobHelper.current(goal: currentGoal) {
+            // 해당 목표에 달려있던 굿잡들을 달성으로 바꿔준다
+            if let currentJobs = GoodJobHelper.current() {
                 for currentJob in currentJobs {
                     GoodJobHelper.complete(job: currentJob)
                 }
+            }
+            // 현재 목표를 달성한 것으로 바꿔주고
+            let realm = try! Realm()
+            do {
+                try realm.write {
+                    currentGoal.isAchieved = true
+                }
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    class func checkIfCurrentGoalMet() {
+        print("목표달성 여부 확인")
+        if let currentGoal = current() {
+            let currentJobsCount = GoodJobHelper.currentCount()
+            if currentJobsCount >= currentGoal.desiredAchievement {
+                print("목표 달성!")
+                let alert = AlertController(title: "목표달성!", message: "\(currentGoal.content)", preferredStyle: .alert)
+                alert.add(AlertAction(title: "확인", style: .preferred, handler: { (action) in
+                    self.completeCurrent()
+                }))
+                alert.present()
             }
         }
     }

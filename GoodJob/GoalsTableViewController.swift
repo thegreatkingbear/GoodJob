@@ -11,9 +11,9 @@ import RealmSwift
 
 class GoalsTableViewController: UITableViewController {
 
-    var currentGoal: Goals?
     var notificationToken: NotificationToken?
     var stampImageView: UIImageView?
+    var delegate: JobsProtocol?
     
     //MARK: 뷰 라이프사이클
     override func viewDidLoad() {
@@ -22,12 +22,14 @@ class GoalsTableViewController: UITableViewController {
         
         // realm의 fine grained notification 사용
         notificationToken = GoalsHelper.all()?.addNotificationBlock({ (changes) in
-            print(changes)
+            //print(changes)
             switch changes {
             case .initial: self.tableView.reloadData()
             case .update(_, let deletions, let insertions, let updates):
                 let fromRow = {(row: Int) in
                     return IndexPath(row: row, section: 0)}
+                
+                GoalsHelper.checkIfCurrentGoalMet()
                 
                 self.tableView.beginUpdates()
                 self.tableView.deleteRows(at: deletions.map(fromRow), with: .left)
@@ -46,6 +48,9 @@ class GoalsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         updateThisView()
+        
+        let realm = try! Realm()
+        print(realm.objects(Jobs.self))
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,14 +65,17 @@ class GoalsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Goals", for: indexPath) as! GoalsTableViewCell
-        let goal = GoalsHelper.all()?[indexPath.row]
-        if (goal?.isAchieved)! {
-            cell.status?.text = "완료됨"
-        } else {
-            cell.status?.text = "진행중"
+        if let goal = GoalsHelper.all()?[indexPath.row] {
+            //print(goal)
+            if goal.isAchieved {
+                cell.status?.text = "완료됨"
+            } else {
+                cell.status?.text = "진행중"
+            }
+            cell.contents?.text = goal.content
+            let count = GoodJobHelper.ofGoalCount(goal: goal)
+            cell.achievement?.text = "\(count)\n/\(goal.desiredAchievement)"
         }
-        cell.contents?.text = goal?.content
-        cell.achievement?.text = "\(goal?.desiredAchievement)"
         return cell
     }
     
@@ -76,7 +84,7 @@ class GoalsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        if editingStyle == .none {
         }
     }
     
@@ -124,7 +132,12 @@ class GoalsTableViewController: UITableViewController {
             let desiredTextField = alert.textFields![1] as UITextField
             let desired = desiredTextField.text!
             //TODO: 여기 두 개의 텍스트 필드를 밸리데이트해서 넘겨주는 로직이 필요하다. 리액티브 코코아로?
-            GoalsHelper.add(description: content, desired: Int(desired)!)
+            GoalsHelper.add(description: content, desired: Int(desired)!) { (isSuccess) in
+                if isSuccess {
+                    // 델리게이트 패턴으로 현재 목표를 재설정해준다
+                    self.delegate?.updateCurrentGoal()
+                }
+            }
         })
         let cancelAction = UIAlertAction(title: "취소", style: .default, handler: {
             (action : UIAlertAction!) -> Void in

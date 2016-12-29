@@ -10,13 +10,26 @@ import Foundation
 import RealmSwift
 
 class GoodJobHelper {
-    class func current(goal: Goals?) -> Results<Jobs>? {
+    class func ofGoal(goal: Goals?) -> Results<Jobs>? {
         let realm = try! Realm()
+        return realm.objects(Jobs.self).filter("goal == %@", goal as Any).sorted(byProperty: "date", ascending: false)
+    }
+    
+    class func ofGoalCount(goal: Goals?) -> Int {
+        if let current = ofGoal(goal: goal) {
+            return current.count
+        }
+        return 0
+    }
+    
+    class func current() -> Results<Jobs>? {
+        let realm = try! Realm()
+        let goal = GoalsHelper.current()
         return realm.objects(Jobs.self).filter("goal == %@ AND isArchived == false", goal as Any).sorted(byProperty: "date", ascending: false)
     }
     
-    class func currentCount(goal: Goals?) -> Int {
-        if let current = current(goal: goal) {
+    class func currentCount() -> Int {
+        if let current = current() {
             return current.count
         }
         return 0
@@ -31,6 +44,7 @@ class GoodJobHelper {
             try realm.write {
                 realm.add(goodJob)
             }
+            GoalsHelper.checkIfCurrentGoalMet()
         } catch let error as NSError {
             print(error.localizedDescription)
         }
@@ -58,9 +72,9 @@ class GoodJobHelper {
         }
     }
     
-    class func updateGoal(fromGoal: Goals?, toGoal: Goals) -> Void {
+    class func updateGoal(fromGoal: Goals?, toGoal: Goals, completion:@escaping(Bool) -> Void) -> Void {
         let realm = try! Realm()
-        if let unassigned = current(goal: fromGoal) {
+        if let unassigned = ofGoal(goal: fromGoal) {
             for one in unassigned {
                 do {
                     try realm.write {
@@ -68,8 +82,10 @@ class GoodJobHelper {
                     }
                 } catch let error as NSError {
                     print(error.localizedDescription)
+                    completion(false)
                 }
             }
+            completion(true)
         }
     }
 }

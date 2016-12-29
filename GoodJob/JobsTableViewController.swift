@@ -9,7 +9,11 @@
 import UIKit
 import RealmSwift
 
-class JobsTableViewController: UITableViewController {
+protocol JobsProtocol {
+    func updateCurrentGoal() -> Void
+}
+
+class JobsTableViewController: UITableViewController, JobsProtocol {
     
     var currentGoal: Goals?
     var notificationToken: NotificationToken?
@@ -20,39 +24,22 @@ class JobsTableViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        notificationToken = GoodJobHelper.current(goal: currentGoal)?.addNotificationBlock({ (changes) in
-            print(changes)
-            switch changes {
-            case .initial: self.tableView.reloadData()
-            case .update(_, let deletions, let insertions, let updates):
-                let fromRow = {(row: Int) in
-                    return IndexPath(row: row, section: 0)}
-                
-                self.tableView.beginUpdates()
-                self.tableView.deleteRows(at: deletions.map(fromRow), with: .left)
-                self.tableView.insertRows(at: insertions.map(fromRow), with: .right)
-                if insertions.count > 0 {
-                    self.showStampImage()
-                }
-                self.tableView.reloadRows(at: updates.map(fromRow), with: .none)
-                self.tableView.endUpdates()
-                self.updateViewTitle(number: GoodJobHelper.currentCount(goal: self.currentGoal))
-            default: break
-            }
-        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        currentGoal = GoalsHelper.current()
-        
-        let realm = try! Realm()
-        print(realm.objects(Jobs.self))
+        updateCurrentGoal()
         
         updateThisView()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        notificationToken = nil
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -60,12 +47,13 @@ class JobsTableViewController: UITableViewController {
 
     //MARK: 테이블 뷰 델리게이트 & 데이터소스
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GoodJobHelper.currentCount(goal: currentGoal)
+        print("행수: \(GoodJobHelper.currentCount())")
+        return GoodJobHelper.currentCount()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Jobs", for: indexPath) as! JobsTableViewCell
-        let job = GoodJobHelper.current(goal: currentGoal)?[indexPath.row]
+        let job = GoodJobHelper.current()?[indexPath.row]
         cell.contents?.text = job?.content
         cell.date?.text = job?.date.toFriendlyDateTimeString(false)
         return cell
@@ -77,7 +65,7 @@ class JobsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let job = GoodJobHelper.current(goal: currentGoal)?[indexPath.row]
+            let job = GoodJobHelper.current()?[indexPath.row]
             GoodJobHelper.delete(job: job!)
         }
     }
@@ -86,13 +74,45 @@ class JobsTableViewController: UITableViewController {
         return 80
     }
     //MARK: 내부로직
+    func updateCurrentGoal() {
+        currentGoal = GoalsHelper.current()
+        
+        updateNotificationToken()
+    }
+    
     func updateViewTitle(number: Int) -> Void {
         title = "참 잘했어요 \(number)개"
     }
     
     func updateThisView() -> Void {
-        updateViewTitle(number: GoodJobHelper.currentCount(goal: currentGoal))
+        updateViewTitle(number: GoodJobHelper.currentCount())
         tableView.reloadData()
+    }
+    
+    func updateNotificationToken() {
+        print("update notification token() called")
+        notificationToken = nil
+        notificationToken = GoodJobHelper.current()?.addNotificationBlock({ (changes) in
+            print(changes)
+            self.updateViewTitle(number: GoodJobHelper.currentCount())
+            switch changes {
+            case .initial: self.tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                let fromRow = {(row: Int) in
+                    return IndexPath(row: row, section: 0)}
+                
+                self.tableView.beginUpdates()
+                self.tableView.deleteRows(at: deletions.map(fromRow), with: .left)
+                self.tableView.insertRows(at: insertions.map(fromRow), with: .right)
+                if insertions.count > 0 {
+                    self.showStampImage()
+                }
+                self.tableView.reloadRows(at: modifications.map(fromRow), with: .automatic)
+                print("current count: \(GoodJobHelper.currentCount())")
+                self.tableView.endUpdates()
+            default: break
+            }
+        })
     }
     
     func showStampImage() {
@@ -117,6 +137,7 @@ class JobsTableViewController: UITableViewController {
             let textField = alert.textFields![0] as UITextField
             let content = textField.text!
             GoodJobHelper.add(description: content)
+            self.updateCurrentGoal()
         })
         let cancelAction = UIAlertAction(title: "취소", style: .default, handler: {
             (action : UIAlertAction!) -> Void in
@@ -131,7 +152,13 @@ class JobsTableViewController: UITableViewController {
     }
     
     @IBAction func goalsButtonTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: "현재 목표는", message: "총 개의 목표 중에 개를 달성중입니다", preferredStyle: .alert)
+        var title = "아직 목표는 정해지지 않았습니다"
+        var message = "목표를 정하시려면 편집 버튼을 눌러주세요"
+        if let currentGoal = GoalsHelper.current() {
+            title = "현재 목표는 \(currentGoal.content)"
+            message = "총 \(currentGoal.desiredAchievement)개의 목표 중에 \(GoodJobHelper.currentCount())개를 달성중입니다"
+        }
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
             
         }
@@ -142,6 +169,15 @@ class JobsTableViewController: UITableViewController {
         alert.addAction(okAction)
         alert.addAction(editAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK: 뷰 세그웨이
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoalsTable" {
+            if let dest = segue.destination as? GoalsTableViewController {
+                dest.delegate = self
+            }
+        }
     }
 }
 
